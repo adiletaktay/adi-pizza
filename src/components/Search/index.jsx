@@ -5,6 +5,12 @@ import styles from './Search.module.scss';
 
 export default function Search() {
     const { searchValue, setSearchValue } = React.useContext(SearchContext);
+    const inputRef = React.useRef();
+
+    const onClickClear = () => {
+        setSearchValue('');
+        inputRef.current.focus();
+    };
 
   return (
     <div className={styles.root}>
@@ -18,13 +24,14 @@ export default function Search() {
             </g>
         </svg>
         <input
+            ref={inputRef}
             value={searchValue}
             onChange={(event) => setSearchValue(event.target.value)} 
             className={styles.input} 
             placeholder='Поиск пиццы ...' />
         {searchValue && (
             <svg 
-            onClick={() => setSearchValue('')}
+            onClick={onClickClear}
                 className={styles.clearIcon}
                 viewBox="0 0 20 20" 
                 xmlns="http://www.w3.org/2000/svg">
