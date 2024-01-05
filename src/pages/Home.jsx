@@ -32,20 +32,22 @@ const Home = () => {
         dispatch(setCurrentPage(number));
     }
 
-    const fetchPizzas = () => {
+    const fetchPizzas = async () => {
         setIsLoading(true);
 
         const search = searchValue ? `&search=${searchValue}` : '';
 
-        axios.get(`https://657b056e394ca9e4af1366a2.mockapi.io/items?page=${currentPage}&limit=4&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sort.sortProperty}&order=desc${search}`)
-            .then((res) => {
-                setItems(res.data);
-                setIsLoading(false);
-            })
-            .catch((err) => {
-                setItems([]);
-                setIsLoading(false);
-            });
+        try {
+            const res = await axios.get(
+                `https://657b056e394ca9e4af1366a2.mockapi.io/items?page=${currentPage}&limit=4&${categoryId > 0 ? `category=${categoryId}` : ''}&sortBy=${sort.sortProperty}&order=desc${search}`
+            );
+            setItems(res.data);
+        } catch (error) {
+            setItems([]);
+            console.log(error);
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     React.useEffect(() => {
@@ -85,7 +87,7 @@ const Home = () => {
         }
 
         isSearch.current = false;
-    }, [categoryId, sort.sortProperty, searchValue, currentPage]);
+    }, [categoryId, sort, searchValue, currentPage]);
     
     const pizzas = items.map((obj) => <PizzaBlock key={obj.id} {...obj} />)
     const skeletons = [...new Array(6)].map((_, index) => <Skeleton key={index} />)
