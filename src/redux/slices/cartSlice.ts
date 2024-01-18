@@ -11,7 +11,7 @@ export type CartItem = {
     count: number;
 }
 
-type CartSliceState = {
+export interface CartSliceState {
     totalPrice: number;
     items: CartItem[];
 }

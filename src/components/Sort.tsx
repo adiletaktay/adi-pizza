@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort, selectSort } from '../redux/slices/filterSlice';
+import { setSort, selectSort, SortPropertyEnum } from '../redux/slices/filterSlice';
 
 type SortItem = {
     name: string;
-    sortProperty: string;
+    sortProperty: SortPropertyEnum;
 };
 
 type PopupClick = MouseEvent & {
@@ -12,12 +12,12 @@ type PopupClick = MouseEvent & {
 };
 
 export const sortList: SortItem[] = [
-    { name: "популярности", sortProperty: "rating" },
-    { name: "цене", sortProperty: "price" },
-    { name: "алфавиту", sortProperty: "title" },
+    { name: "популярности", sortProperty: SortPropertyEnum.RATING },
+    { name: "цене", sortProperty: SortPropertyEnum.PRICE },
+    { name: "алфавиту", sortProperty: SortPropertyEnum.TITLE },
 ];
 
-function Sort() {
+function SortPopup() {
     const dispatch = useDispatch();
     const sort = useSelector(selectSort)
     const sortRef = React.useRef<HTMLDivElement>(null);
@@ -79,4 +79,4 @@ function Sort() {
     )
 }
 
-export default Sort;
+export default SortPopup;
