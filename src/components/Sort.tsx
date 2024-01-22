@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { setSort, selectSort, SortPropertyEnum } from '../redux/slices/filterSlice';
+import { useDispatch } from 'react-redux';
+import { setSort, SortPropertyEnum, Sort } from '../redux/slices/filterSlice';
 
 type SortItem = {
     name: string;
@@ -11,6 +11,10 @@ type PopupClick = MouseEvent & {
     path: Node[];
 };
 
+type SortPopupProps = {
+    value: Sort;
+}
+
 export const sortList: SortItem[] = [
     { name: "популярности ᐃ", sortProperty: SortPropertyEnum.RATING_DESC },
     { name: "популярности ᐁ", sortProperty: SortPropertyEnum.RATING_ASC },
@@ -20,9 +24,8 @@ export const sortList: SortItem[] = [
     { name: "алфавиту ᐁ", sortProperty: SortPropertyEnum.TITLE_ASC },
 ];
 
-function SortPopup() {
+const SortPopup: React.FC<SortPopupProps> = React.memo(({ value }) => {
     const dispatch = useDispatch();
-    const sort = useSelector(selectSort)
     const sortRef = React.useRef<HTMLDivElement>(null);
 
     const [open, setOpen] = React.useState(false);
@@ -61,7 +64,7 @@ function SortPopup() {
                     />
                 </svg>
                 <b>Сортировка по:</b>
-                <span onClick={() => setOpen(!open)}>{sort.name}</span>
+                <span onClick={() => setOpen(!open)}>{value.name}</span>
             </div>
             {open && (
                 <div className="sort__popup">
@@ -71,7 +74,7 @@ function SortPopup() {
                                 key={i}
                                 onClick={() => {
                                 onClickListItem(obj)}}
-                                className={sort.sortProperty === obj.sortProperty ? "active" : ""}>
+                                className={value.sortProperty === obj.sortProperty ? "active" : ""}>
                                 {obj.name}
                             </li>
                         ))}
@@ -80,6 +83,6 @@ function SortPopup() {
             )}
         </div>
     )
-}
+});
 
 export default SortPopup;

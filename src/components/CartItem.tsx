@@ -24,9 +24,7 @@ const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, price, size, 
     }; 
 
     const onClickMinus = () => {
-        if (count > 0) {
             dispatch(minusItem(id))
-        }
     }; 
 
     const onClickRemove = () => {
@@ -49,7 +47,9 @@ const CartItemBlock: React.FC<CartItemProps> = ({ id, title, type, price, size, 
             <p>{type}, {size} см.</p>
         </div>
         <div className="cart__item-count">
-            <button onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
+            <button
+                disabled={count === 1} 
+                onClick={onClickMinus} className="button button--outline button--circle cart__item-count-minus">
             <svg
                 width="10"
                 height="10"
