@@ -69,7 +69,7 @@ export const Home: React.FC = () => {
             dispatch(
                 setFilters({
                 searchValue: params.search,
-                categoryId: Number(params.category),
+                categoryId: Number(params.category) || 0,
                 currentPage: Number(params.currentPage),
                 sort: sort || sortList[0],
                 }),
