@@ -1,0 +1,10 @@
+.full-pizza {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    img {
+        width: 100%;
+        max-width: 600px;
+    }
+}

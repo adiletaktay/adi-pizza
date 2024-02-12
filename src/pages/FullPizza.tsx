@@ -31,14 +31,16 @@ export const FullPizza: React.FC = () => {
 
   return (
     <div className='container'>
-        <img src={pizza.image} alt="pizza" />
-        <h2>{pizza.title}</h2>
-        <h4>{pizza.price} ₽</h4>
-        <Link to='/'>
-            <button className="button button--outline button--add">
-                <span>Вернуться назад</span>
-            </button>
-        </Link>
+        <div className='full-pizza'>
+            <img src={pizza.image} alt="pizza" />
+            <h2>{pizza.title}</h2>
+            <h4>{pizza.price} ₽</h4>
+            <Link to='/'>
+                <button className="button button--outline button--add">
+                    <span>Вернуться назад</span>
+                </button>
+            </Link>
+        </div>
     </div>
   )
 }
