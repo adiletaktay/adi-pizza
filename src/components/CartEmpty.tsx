@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Link } from "react-router-dom"
 
-import cartEmpty from "../assets/img/cartEmpty.svg";
+import cartEmpty from "../assets/img/cartEmpty.svg"
 
 export const CartEmpty: React.FC = () => (
   <div className="cart cart--empty">
@@ -16,4 +16,4 @@ export const CartEmpty: React.FC = () => (
       <span>Вернуться назад</span>
     </Link>
   </div>
-);
+)
